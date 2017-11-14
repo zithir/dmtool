@@ -14,21 +14,21 @@ Files, folders and their purpose:
 
 -- `data` - folder with information from DnD rulebooks in XML format
 
-|-- `characters.xml` - data regarding attributes and creation of characters
+  |-- `characters.xml` - data regarding attributes and creation of characters
 
 -- `func` - folder for main functions, that can be run from dmtool.py
 
-|-- `make_char.py` - Process of generating a character, interactive using raw_input or it might read a simple TXT file with basic parameters of a character
+  |-- `make_char.py` - Process of generating a character, interactive using raw_input or it might read a simple TXT file with basic parameters of a character
 
 -- `libraries` - folder for libraries with various generally useful functions
 
-|-- `dnd.py` -  general DnD functions such as dice roll
+  |-- `dnd.py` -  general DnD functions such as dice roll
 
-|-- `xml_io.py` - functions for reading and writing input and output XML files
+  |-- `xml_io.py` - functions for reading and writing input and output XML files
 
 -- `Output` - generated output
 
-|-- `Characters` - folder with generated characters
+  |-- `Characters` - folder with generated characters
 
-|-- `<character>.xml/.txt`  - generated character in both XML format for further operations and in TXT for better readability outside dmtool.py
+    |-- `<character>.xml/.txt`  - generated character in both XML format for further operations and in TXT for better readability outside dmtool.py
 
