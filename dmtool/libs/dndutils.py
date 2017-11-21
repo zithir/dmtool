@@ -1,17 +1,23 @@
-# Library with basic DnD functions 
+"""
+Library with general DnD functions
+It can be called from every other module.
+This file contains the old code, which is commented at the bottom. Only
+when the function is used, it can be uncommented.
+"""
+
 import random
 
-# DICE ROLL
-# Basic dice roll for sum of any number of any-sided dices
-# Arguments:
-#   side = number of sides 
-#   rolls = number of dices
-def dnd_dice (sides, rolls):
 
+def roll(sides, rolls):
+    """
+    Classic dnd roll for any number of rolls with any-sided dice.
+    First argument is number of sides of the dice and the second number of
+    rolls with the dice
+    """
     value = 0
     for i in range (rolls):
         x=random.randint(1,sides)
-        value = value + x
+        value += x
     return value
 
 # ATTRIBUTES ROLL
@@ -30,7 +36,7 @@ def attr_roll ():
 
     value.sort(reverse=True)
     return (value)
-       
+
 def class_select (clas):
     attributes = attr_roll ()
     if clas == "barbarian":
@@ -42,8 +48,8 @@ def class_select (clas):
         chr = attributes[4]
         fort = 2
         ref = 0
-        will = 0 
-    
+        will = 0
+
     elif clas == "wizard":
         str = attributes[5]
         dex = attributes[1]
@@ -53,8 +59,8 @@ def class_select (clas):
         chr = attributes[4]
         fort = 2
         ref = 0
-        will = 0 
-    
+        will = 0
+
     elif clas == "rogue":
         str = attributes[4]
         dex = attributes[0]
@@ -64,19 +70,19 @@ def class_select (clas):
         chr = attributes[5]
         fort = 2
         ref = 0
-        will = 0 
+        will = 0
 
-    return {"Saves": {"Fortitude":fort, "Willpower":will, "Reflexes":ref}, 
+    return {"Saves": {"Fortitude":fort, "Willpower":will, "Reflexes":ref},
             "Attributes": {'Str':str, 'Dex':dex, 'Con':con, 'Ing':ing, 'Wis':wis, 'Chr':chr}}
-  
+
 
 def race_select (race, character):
     if race=="human":
-        character["Attributes"] = character["Attributes"]          
+        character["Attributes"] = character["Attributes"]
     elif race=="dwarf":
        character["Attributes"]["Con"] =  character["Attributes"]["Con"] + 2
        character["Attributes"]["Chr"] =  character["Attributes"]["Chr"] - 2
-        
+
     elif race=="elf":
         character["Attributes"]["Dex"] =  character["Attributes"]["Dex"] + 2
         character["Attributes"]["Con"] =  character["Attributes"]["Con"] - 2
