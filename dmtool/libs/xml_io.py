@@ -9,5 +9,10 @@ modified acordingly.
 import data.characters
 
 
-def get_races():
-    return data.characters.races
+def get(query):
+    if query == "races":
+        return data.characters.races
+    elif query == "classes":
+        return data.characters.classes
+    else:
+        return

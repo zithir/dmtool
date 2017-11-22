@@ -15,11 +15,24 @@ def roll(sides, rolls):
     rolls with the dice
     """
     value = 0
-    for i in range (rolls):
-        x=random.randint(1,sides)
+    for i in range(rolls):
+        x=random.randint(1, sides)
         value += x
     return value
 
+def ensure():
+    """
+    A general function to confirm selection.
+    """
+    good = input("Are you sure? (y/N)")
+    while  good != "y" or good != "N":
+        if good == "y":
+            return True
+        elif good == "N":
+            return False
+        else:
+            good = input("Are you sure? (y/N)")
+"""
 # ATTRIBUTES ROLL
 # Roll for character creation.
 # Returns array of 6 3d6 rolls. Rolls 4 times and removes the smallest value.
@@ -87,3 +100,4 @@ def race_select (race, character):
         character["Attributes"]["Dex"] =  character["Attributes"]["Dex"] + 2
         character["Attributes"]["Con"] =  character["Attributes"]["Con"] - 2
     return character
+"""
