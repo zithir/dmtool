@@ -20,36 +20,24 @@ def roll(sides, rolls):
         value += x
     return value
 
-def ensure():
+def ensure(mode, extra = ""):
     """
     A general function to confirm selection.
+    Supressed by q(uick)_mode
     """
-    good = input("Are you sure? (y/N)")
-    while  good != "y" or good != "N":
-        if good == "y":
-            return True
-        elif good == "N":
-            return False
-        else:
-            good = input("Are you sure? (y/N)")
+    if 'q' in mode:
+        return True
+    else:
+        while True:
+            good = input("Do you want to proceed?  %s (y/N) " % extra)
+            print()
+            if good == "y":
+                return True
+            elif good == "N":
+                return False
+
+
 """
-# ATTRIBUTES ROLL
-# Roll for character creation.
-# Returns array of 6 3d6 rolls. Rolls 4 times and removes the smallest value.
-def attr_roll ():
-
-    value = [0,0,0,0,0,0]
-    for i in range (6):
-        rolls = [0,0,0,0]
-        for x in range (4):
-            rolls[x] = dnd_dice (6,1)
-        rolls.remove(min(rolls))
-        z = sum(rolls)
-        value[i] = z
-
-    value.sort(reverse=True)
-    return (value)
-
 def class_select (clas):
     attributes = attr_roll ()
     if clas == "barbarian":

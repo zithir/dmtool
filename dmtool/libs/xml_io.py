@@ -14,5 +14,15 @@ def get(query):
         return data.characters.races
     elif query == "classes":
         return data.characters.classes
+    elif query == "ability_names":
+        return data.characters.ability_names
     else:
         return
+
+
+def ability_names():
+    return data.characters.ability_names
+
+
+def best_abilities(classs):
+    return data.characters.best_ab[classs]
