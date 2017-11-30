@@ -1,23 +1,17 @@
+"""
+This module is used to lead the user throught the interactive creation of the
+character.
+In the end the created characet should be imported to XML file with the name of
+the character.
+"""
+
 from libs.dndutils import *
 from libs.xml_io import *
+from libs.character_class import Character
 
 MODE = ''
 character = None
 
-class Character(object):
-    abilities = {'Str': 0, 'Dex': 0, 'Con': 0, 'Int': 0, 'Wis': 0, 'Cha': 0}
-    saves = {'Fort': 0, 'Refl': 0, 'Will': 0}
-    def __init__(self, name, race, classs):
-        self.name = name
-        self.race = race
-        self.classs = classs
-
-    def __repr__(self):
-        return "%s, a(n) %s %s" % (self.name, self.race, self.classs)
-
-    def show_abilities(self):
-        for key in ability_names():
-            print("%s:  %s" % key, abilities(key))
 
 
 def main(name, race, classs, mode):
@@ -36,6 +30,7 @@ def main(name, race, classs, mode):
 
     #-------------------------------------------------------------------------#
     # NAME, RACE, CLASS
+    #-------------------------------------------------------------------------#
     # Asking about name, race and class of the character
     # Nested in 'while' statement to allow confirmation and possibility
     # to start over
@@ -71,20 +66,33 @@ def main(name, race, classs, mode):
 
     #-------------------------------------------------------------------------#
     # ABILITY SCORES
+    #-------------------------------------------------------------------------#
+
     # Assigning ability scores
 
     confirm = False # Reset the confirm value
     while confirm is False:
         ab_scores_select(character)
+
         print("The character will have the following ability scores:")
         print(character.abilities, "\n")
         confirm = ensure(mode, "Warning, new values will be rolled.")
 
 
+    #-------------------------------------------------------------------------#
+    #COMBAT NUMBERS
+    #-------------------------------------------------------------------------#
+
+
+
     return character
+
 ###############################################################################
-#------------------------------------------------------------------------------
-# Individual functions:
+# Individual functions used in main:
+###############################################################################
+#-------------------------------------------------------------------------#
+# NAME, RACE, CLASS
+#-------------------------------------------------------------------------#
 
 def name_select():
     print("Please enter name of your character:")
@@ -122,6 +130,10 @@ def classs_select():
     return classs
 
 
+#-------------------------------------------------------------------------#
+# ABILITY SCORES
+#-------------------------------------------------------------------------#
+
 def ab_scores_roll():
     """
     ATTRIBUTES ROLL
@@ -140,11 +152,12 @@ def ab_scores_roll():
     value.sort(reverse=True)
     return (value)
 
+
 def ab_scores_select(character):
     print("Starting ability scores asignment")
 
     confirm = False
-    while confirm == False:
+    while confirm is False:
         rolls = ab_scores_roll()
         print("Following values have been rolled: ")
         print(rolls)
@@ -152,20 +165,24 @@ def ab_scores_select(character):
 
     if 'a' in MODE:
         print("Automated ability scores assignment")
-        for ability in best_abilities(character.classs):
+        for ability in get_best_abilities(character.classs):
             character.abilities[ability] = rolls.pop(0)
     else:
         print("Manual ability scores assignment")
-        for ability in ability_names():
+        for ability in get_ability_names():
             character.abilities[ability] = ab_scores_assign(character,
-            rolls, ability)
+                                                            rolls, ability)
 
+            character.abilities[ability] += get_ability_adjustment(
+                                                        character.race, ability)
 
 
 def ab_scores_assign(character, rolls, ability):
     print('Assign a value for %s, following are availiable:\n%s'
-        % (ability, str(rolls)))
-
+            % (ability, str(rolls)))
+    if get_ability_adjustment(character.race, ability) != 0:
+        print('(Race modifier for this ability: %s)' %
+                get_ability_adjustment(character.race, ability))
     while True:
         assignment = input('%s = ' % ability)
         try:
@@ -173,7 +190,11 @@ def ab_scores_assign(character, rolls, ability):
             if assignment in rolls:
                 rolls.remove(assignment)
                 return assignment
-
         except ValueError:
             pass
         print("Value not available try again.")
+
+
+#-------------------------------------------------------------------------#
+# COMBAT NUMBERS
+#-------------------------------------------------------------------------#

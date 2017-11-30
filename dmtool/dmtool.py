@@ -7,6 +7,7 @@ The modules should handle the specific functionality.
 
 import modules.characterGenerator as characterGenerator
 
+
 character = None
 
 def make_character(name = "", race = "", classs = "", mode = "s"):
@@ -15,4 +16,5 @@ def make_character(name = "", race = "", classs = "", mode = "s"):
      return character
 
 print("Welcome to dmtool")
-make_character("Monty", "elf", "wizard", "q" )  # DEBUG
+make_character("Monty", "human", "wizard", "qa" )  # DEBUG
+character.show_abilities()

@@ -20,9 +20,16 @@ def get(query):
         return
 
 
-def ability_names():
+def get_ability_names():
     return data.characters.ability_names
 
 
-def best_abilities(classs):
-    return data.characters.best_ab[classs]
+def get_best_abilities(classs):
+    return data.characters.ability_best[classs]
+
+
+def get_ability_adjustment(race, ability):
+    try:
+        return data.characters.ability_adjustment[race][ability]
+    except KeyError:
+        return 0
