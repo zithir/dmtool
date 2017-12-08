@@ -7,7 +7,7 @@ the character.
 
 from libs.dndutils import *
 from libs.fetch_data import *
-from libs.character_class import Character
+from libs.character_class import *
 
 MODE = ''
 character = None
@@ -54,7 +54,7 @@ def main(name, race, classs, mode):
             print("Provided class is not availible.")
             classs = classs_select()
 
-        character = Character(name, race, classs)
+        character = Fighter(name, race, classs)
         print("The character will be ", character, "\n" )
 
         # Ensuring that imput is valid, otherwise the process restarts
