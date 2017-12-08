@@ -5,14 +5,14 @@ will run a main function of individual module from "modules" directory.
 The modules should handle the specific functionality.
 """
 
-import modules.characterGenerator as characterGenerator
+import modules.character_generator as character_generator
 
 
 character = None
 
 def make_character(name = "", race = "", classs = "", mode = "s"):
      global character
-     character = characterGenerator.main(name, race, classs, mode)
+     character = character_generator.main(name, race, classs, mode)
      return character
 
 print("Welcome to dmtool")

@@ -2,6 +2,7 @@
 This file should contain purely the Character class and its methods
 '''
 from libs.dndutils import roll
+from libs.dndutils import ability_modifier
 from libs.fetch_data import *
 
 
@@ -22,7 +23,7 @@ class Character(object):
         """
         TODO: make and use translator to convert ability score to ability bonus
         """
-            self.skill_points = (2 + self.abilities['Int']) * 4
+        self.skill_points = (2 + ability_modifier(self.abilities['Int'])) * 4
 
     def show_abilities(self):
         for key in get_ability_names():
@@ -39,7 +40,6 @@ class Barbarian(Character):
                     'Will': [0,0,1,1,1,2,2,2,3,3,3,4,4,4,5,5,5,6,6,6]
                     }
 
-class Bard(Character):
 
 class Fighter(Character):
     abilities_order = ['Str', 'Con', 'Dex', 'Cha', 'Wis', 'Int']
