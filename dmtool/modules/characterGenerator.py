@@ -6,7 +6,7 @@ the character.
 """
 
 from libs.dndutils import *
-from libs.xml_io import *
+from libs.fetch_data import *
 from libs.character_class import Character
 
 MODE = ''
