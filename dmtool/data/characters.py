@@ -5,7 +5,7 @@ into xmls.
 
 races = ["human", "elf", "dwarf", "gnome", "half-elf", "half-orc", "halfling"]
 classes = ["fighter", "rogue", "wizard", "barbarian", "paladin", "sorcerer",
-"bard", "cleric", "druid", "monk", "ranger"]
+            "bard", "cleric", "druid", "monk", "ranger"]
 
 # Fixed ability order that should be used any time
 ability_names = ['Str', 'Dex', 'Con', 'Int', 'Wis', 'Cha']
@@ -25,6 +25,7 @@ ability_best = {
                 'druid'     :['Wis', 'Int', 'Dex', 'Cha', 'Con', 'Str'],
                 'monk'      :['Wis', 'Dex', 'Str', 'Con', 'Int', 'Cha'],
                 'ranger'    :['Dex', 'Str', 'Wis', 'Con', 'Int', 'Cha'],
+                
                 }
 
 ability_adjustment = {
