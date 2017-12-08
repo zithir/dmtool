@@ -5,11 +5,7 @@ into xmls.
 
 races = ["human", "elf", "dwarf", "gnome", "half-elf", "half-orc", "halfling"]
 classes = ["fighter", "rogue", "wizard", "barbarian", "paladin", "sorcerer",
-<<<<<<< HEAD
-                                    "bard", "cleric", "druid", "monk", "ranger"]
-=======
-           "bard", "cleric", "druid", "monk", "ranger"]
->>>>>>> f1d9c53804014ff693309573e017ed0181974d7c
+"bard", "cleric", "druid", "monk", "ranger"]
 
 # Fixed ability order that should be used any time
 ability_names = ['Str', 'Dex', 'Con', 'Int', 'Wis', 'Cha']
@@ -18,20 +14,6 @@ ability_best = {
 # Manually created list of best order of abilities for a given class
 # The order can be adjusted
 # Descending order (from high priority to low)
-<<<<<<< HEAD
-                'fighter':['Str', 'Con', 'Cha', 'Dex', 'Wis', 'Int'],
-                'rogue'  :['Dex','Int','Wis', 'Con', 'Str', 'Cha'],
-                'wizard'   :['Int', 'Dex', 'Con', 'Wis', 'Cha', 'Str'],
-                'barbarian' :['Str', 'Dex', 'Con', 'Wis', 'Chr', 'Int'],
-                'paladin' :['Chr', 'Str', 'Wis', 'Con', 'Int', 'Dex'],
-                'sorcerer' :['Chr', ''],
-                'bard' :[],
-                'cleric' :[],
-                'druid' :[],
-                'monk' :[],
-                'ranger' :[],
-
-=======
                 'fighter'   :['Str', 'Con', 'Cha', 'Dex', 'Wis', 'Int'],
                 'rogue'     :['Dex', 'Int', 'Wis', 'Str', 'Con', 'Cha'],
                 'wizard'    :['Int', 'Wis', 'Cha', 'Con', 'Dex', 'Str'],
@@ -43,8 +25,6 @@ ability_best = {
                 'druid'     :['Wis', 'Int', 'Dex', 'Cha', 'Con', 'Str'],
                 'monk'      :['Wis', 'Dex', 'Str', 'Con', 'Int', 'Cha'],
                 'ranger'    :['Dex', 'Str', 'Wis', 'Con', 'Int', 'Cha'],
-                
->>>>>>> f1d9c53804014ff693309573e017ed0181974d7c
                 }
 
 ability_adjustment = {
