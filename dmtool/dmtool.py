@@ -7,14 +7,13 @@ The modules should handle the specific functionality.
 
 import modules.character_generator as character_generator
 
-
 character = None
 
-def make_character(name = "", race = "", classs = "", mode = "s"):
+def make_character(name = "", race = "", ch_class = "", mode = "s"):
      global character
-     character = character_generator.main(name, race, classs, mode)
+     character = character_generator.main(name, race, ch_class, mode)
      return character
 
 print("Welcome to dmtool")
 make_character("Monty", "human", "wizard", "qa" )  # DEBUG
-character.show_abilities()
+character.show_abilities() # DEBUG

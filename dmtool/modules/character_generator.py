@@ -14,7 +14,7 @@ character = None
 
 
 
-def main(name, race, classs, mode):
+def main(name, race, ch_class, mode):
     """
     Modes:
     quick, q - quick mode supresses ensure prompts
@@ -48,25 +48,26 @@ def main(name, race, classs, mode):
             print("Provided race is not availible.")
             race = race_select()
 
-        if not classs:
-            classs = classs_select()
-        elif classs not in get("classes"):
+        if not ch_class:
+            ch_class = ch_class_select()
+        elif ch_class not in classes:
             print("Provided class is not availible.")
-            classs = classs_select()
+            ch_class = ch_class_select()
 
-        character = Fighter(name, race, classs)
-        print("The character will be ", character, "\n" )
-
+        print("The character will be ", character, "\n")
         # Ensuring that imput is valid, otherwise the process restarts
         confirm = ensure(MODE)
         if confirm is False:
             name = ""
             race = ""
-            classs = ""
+            ch_class = ""
 
-    #-------------------------------------------------------------------------#
+    # After the basic characterisitic are chose, the character class is created
+    character = class_selector(name, race, ch_class)
+
+    # -------------------------------------------------------------------------#
     # ABILITY SCORES
-    #-------------------------------------------------------------------------#
+    # -------------------------------------------------------------------------#
 
     # Assigning ability scores
 
@@ -82,10 +83,13 @@ def main(name, race, classs, mode):
     #-------------------------------------------------------------------------#
     #COMBAT NUMBERS
     #-------------------------------------------------------------------------#
-    character.count_skill_points()
+    # character.count_skill_points()
 
 
-
+    #-------------------------------------------------------------------------#
+    # THE END
+    # ------------------------------------------------------------------------#
+    character.init2()
     return character
 
 ###############################################################################
@@ -118,17 +122,17 @@ def race_select():
     return race
 
 
-def classs_select():
+def ch_class_select():
     print("Select class of your character, following are available:")
-    print(get("classes"))
-    classs = str(input("")).lower()
-    while classs not in get("classes"):
+    print(sorted(classes))
+    ch_class = str(input("")).lower()
+    while ch_class not in classes:
         print("Such class is not available, please select one from "
             "the following list: ")
-        print(get("classes"))
-        classs = str(input("")).lower()
-    print("Class of character: ", classs, "\n")
-    return classs
+        print(sorted(classes))
+        ch_class = str(input("")).lower()
+    print("Class of character: ", ch_class, "\n")
+    return ch_class
 
 
 #-----------------------------------------------------------------------------#
@@ -166,7 +170,7 @@ def ab_scores_select(character):
 
     if 'a' in MODE:
         print("Automated ability scores assignment")
-        for ability in get_best_abilities(character.classs):
+        for ability in get_best_abilities(character.ch_class):
             character.abilities[ability] = rolls.pop(0)
     else:
         print("Manual ability scores assignment")

@@ -4,8 +4,7 @@ into xmls.
 """
 
 races = ["human", "elf", "dwarf", "gnome", "half-elf", "half-orc", "halfling"]
-classes = ["fighter", "rogue", "wizard", "barbarian", "paladin", "sorcerer",
-            "bard", "cleric", "druid", "monk", "ranger"]
+
 
 # Fixed ability order that should be used any time
 ability_names = ['Str', 'Dex', 'Con', 'Int', 'Wis', 'Cha']
@@ -25,7 +24,7 @@ ability_best = {
                 'druid'     :['Wis', 'Int', 'Dex', 'Cha', 'Con', 'Str'],
                 'monk'      :['Wis', 'Dex', 'Str', 'Con', 'Int', 'Cha'],
                 'ranger'    :['Dex', 'Str', 'Wis', 'Con', 'Int', 'Cha'],
-                
+
                 }
 
 ability_adjustment = {
@@ -34,3 +33,8 @@ ability_adjustment = {
                     'gnome'   : {'Con': 2, 'Str':-2},
                     'half-orc': {'Str': 2, 'Int':-2, 'Chr':-2},
                     }
+
+saves = {
+        '001_3': [0,0,1,1,1,2,2,2,3,3,3,4,4,4,5,5,5,6,6,6],
+        '233_2': [2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10,11,12]
+        }

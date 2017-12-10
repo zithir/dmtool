@@ -36,7 +36,8 @@ def ensure(mode, extra = ""):
             elif good == "N":
                 return False
 
-def ability_modifier(ability_score):    
+
+def ability_modifier(ability_score):
     """
     Returns modifier for any ability score
     """
