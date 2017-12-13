@@ -13,7 +13,6 @@ MODE = ''
 character = None
 
 
-
 def main(name, race, ch_class, mode):
     """
     Modes:
@@ -50,7 +49,7 @@ def main(name, race, ch_class, mode):
 
         if not ch_class:
             ch_class = ch_class_select()
-        elif ch_class not in classes:
+        elif ch_class not in get('classes'):
             print("Provided class is not availible.")
             ch_class = ch_class_select()
 
@@ -63,7 +62,7 @@ def main(name, race, ch_class, mode):
             ch_class = ""
 
     # After the basic characterisitic are chose, the character class is created
-    character = class_selector(name, race, ch_class)
+    character = Character(name, race, ch_class)
 
     # -------------------------------------------------------------------------#
     # ABILITY SCORES
@@ -83,13 +82,12 @@ def main(name, race, ch_class, mode):
     #-------------------------------------------------------------------------#
     #COMBAT NUMBERS
     #-------------------------------------------------------------------------#
-    # character.count_skill_points()
+    character.init2()
 
 
     #-------------------------------------------------------------------------#
     # THE END
     # ------------------------------------------------------------------------#
-    character.init2()
     return character
 
 ###############################################################################
@@ -124,12 +122,12 @@ def race_select():
 
 def ch_class_select():
     print("Select class of your character, following are available:")
-    print(sorted(classes))
+    print(get('classes'))
     ch_class = str(input("")).lower()
-    while ch_class not in classes:
+    while ch_class not in get('classes'):
         print("Such class is not available, please select one from "
             "the following list: ")
-        print(sorted(classes))
+        print(get('classes'))
         ch_class = str(input("")).lower()
     print("Class of character: ", ch_class, "\n")
     return ch_class
@@ -170,7 +168,7 @@ def ab_scores_select(character):
 
     if 'a' in MODE:
         print("Automated ability scores assignment")
-        for ability in get_best_abilities(character.ch_class):
+        for ability in get_best_abilities(character):
             character.abilities[ability] = rolls.pop(0)
     else:
         print("Manual ability scores assignment")

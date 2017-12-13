@@ -8,12 +8,11 @@ modified acordingly.
 
 import data.characters
 
-
 def get(query):
     if query == "races":
         return sorted(data.characters.races)
-    #elif query == "classes":
-    #    return libs.character_class.classes)
+    elif query == "classes":
+        return sorted(data.characters.classes)
     elif query == "ability_names":
         return data.characters.ability_names
     else:
@@ -24,8 +23,8 @@ def get_ability_names():
     return data.characters.ability_names
 
 
-def get_best_abilities(ch_class):
-    return data.characters.ability_best[ch_class]
+def get_best_abilities(character):
+    return character.abilities_order
 
 
 def get_ability_adjustment(race, ability):
