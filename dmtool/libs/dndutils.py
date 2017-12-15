@@ -15,75 +15,77 @@ def roll(sides, rolls):
     rolls with the dice
     """
     value = 0
-    for i in range (rolls):
-        x=random.randint(1,sides)
+    for i in range(rolls):
+        x=random.randint(1, sides)
         value += x
     return value
 
-# ATTRIBUTES ROLL
-# Roll for character creation.
-# Returns array of 6 3d6 rolls. Rolls 4 times and removes the smallest value.
-def attr_roll ():
-
-    value = [0,0,0,0,0,0]
-    for i in range (6):
-        rolls = [0,0,0,0]
-        for x in range (4):
-            rolls[x] = dnd_dice (6,1)
-        rolls.remove(min(rolls))
-        z = sum(rolls)
-        value[i] = z
-
-    value.sort(reverse=True)
-    return (value)
-
-def class_select (clas):
-    attributes = attr_roll ()
-    if clas == "barbarian":
-        str = attributes[0]
-        dex = attributes[2]
-        con = attributes[1]
-        ing = attributes[5]
-        wis = attributes[3]
-        chr = attributes[4]
-        fort = 2
-        ref = 0
-        will = 0
-
-    elif clas == "wizard":
-        str = attributes[5]
-        dex = attributes[1]
-        con = attributes[2]
-        ing = attributes[0]
-        wis = attributes[3]
-        chr = attributes[4]
-        fort = 2
-        ref = 0
-        will = 0
-
-    elif clas == "rogue":
-        str = attributes[4]
-        dex = attributes[0]
-        con = attributes[3]
-        ing = attributes[1]
-        wis = attributes[2]
-        chr = attributes[5]
-        fort = 2
-        ref = 0
-        will = 0
-
-    return {"Saves": {"Fortitude":fort, "Willpower":will, "Reflexes":ref},
-            "Attributes": {'Str':str, 'Dex':dex, 'Con':con, 'Ing':ing, 'Wis':wis, 'Chr':chr}}
+def ensure(mode, extra = ""):
+    """
+    A general function to confirm selection.
+    Supressed by q(uick)_mode
+    """
+    if 'q' in mode:
+        return True
+    else:
+        while True:
+            good = input("Do you want to proceed?  %s (y/N) " % extra)
+            print()
+            if good == "y":
+                return True
+            elif good == "N":
+                return False
 
 
-def race_select (race, character):
-    if race=="human":
-        character["Attributes"] = character["Attributes"]
-    elif race=="dwarf":
-       character["Attributes"]["Con"] =  character["Attributes"]["Con"] + 2
-       character["Attributes"]["Chr"] =  character["Attributes"]["Chr"] - 2
-
-    elif race=="elf":
-        character["Attributes"]["Dex"] =  character["Attributes"]["Dex"] + 2
-        character["Attributes"]["Con"] =  character["Attributes"]["Con"] - 2
-    return character
+def ability_modifier(ability_score):
+    """
+    Returns modifier for any ability score
+    """
+    if ability_score == 1:
+        return -5
+    elif 1 < ability_score < 4:
+        return -4
+    elif 3 < ability_score < 6:
+        return -3
+    elif 5 < ability_score < 8:
+        return -2
+    elif 7 < ability_score < 10:
+        return -1
+    elif 9 < ability_score < 12:
+        return 0
+    elif 11 < ability_score < 14:
+        return 1
+    elif 13 < ability_score < 16:
+        return 2
+    elif 15 < ability_score < 18:
+        return 3
+    elif 17 < ability_score < 20:
+        return 4
+    elif 19 < ability_score < 22:
+        return 5
+    elif 21 < ability_score < 24:
+        return 6
+    elif 23 < ability_score < 26:
+        return 7
+    elif 25 < ability_score < 28:
+        return 8
+    elif 27 < ability_score < 30:
+        return 9
+    elif 29 < ability_score < 32:
+        return 10
+    elif 31 < ability_score < 34:
+        return 11
+    elif 33 < ability_score < 36:
+        return 12
+    elif 35 < ability_score < 38:
+        return 13
+    elif 37 < ability_score < 40:
+        return 14
+    elif 39 < ability_score < 42:
+        return 15
+    elif 41 < ability_score < 44:
+        return 16
+    elif 43 < ability_score < 46:
+        return 17
+    elif 45 < ability_score < 48:
+        return 18
