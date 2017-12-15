@@ -22,11 +22,6 @@ def get(query):
 def get_ability_names():
     return data.characters.ability_names
 
-
-def get_best_abilities(character):
-    return character.abilities_order
-
-
 def get_ability_adjustment(race, ability):
     try:
         return data.characters.ability_adjustment[race][ability]
@@ -34,5 +29,27 @@ def get_ability_adjustment(race, ability):
         return 0
 
 
-def get_saves(key):
-    return data.characters.saves[key]
+def get_saves(id, lvl):
+    '''
+    Returns value of save from list according to level of character
+    '''
+    return data.characters.saves[id][lvl - 1]
+
+def get_class_saves(key, ch_class):
+    '''
+    Returns code that identifies which list of saves applies to given character
+    class
+    '''
+    return data.characters.classes[ch_class]['SavesLvls'][key]
+
+def get_abilities_order(ch_class):
+    return data.characters.classes[ch_class]['AbilitiesOrder']
+
+def get_class_skills(ch_class):
+    return data.characters.classes[ch_class]['ClassSkills']
+
+def get_skillp_modifier(ch_class):
+    return data.characters.classes[ch_class]['SkillPointsModifier']
+
+def get_hit_die(ch_class):
+    return data.characters.classes[ch_class]['HitDie']

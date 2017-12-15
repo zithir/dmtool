@@ -15,5 +15,5 @@ def make_character(name = "", race = "", ch_class = "", mode = "s"):
      return character
 
 print("Welcome to dmtool")
-make_character("Monty", "human", "wizard", "qa" )  # DEBUG
+make_character("Monty", "human", "bard", "qa" )  # DEBUG
 character.show_abilities() # DEBUG

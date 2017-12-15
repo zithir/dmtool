@@ -6,7 +6,7 @@ be added to switch in the class_selector function.
 '''
 from libs.dndutils import roll
 from libs.dndutils import ability_modifier
-import libs.fetch_data
+import libs.fetch_data as fetch_data
 
 #-----------------------------------------------------------------------------#
 # GENERAL CHARACTER CLASS
@@ -26,9 +26,9 @@ class Character(object):
     abilities_order = ['Con', 'Wis', 'Dex', 'Cha', 'Str', 'Int']
     saves = {'Fort': 0, 'Refl': 0, 'Will': 0}
     saves_lvls = {
-                    'Fort': libs.fetch_data.get_saves("001_3"),
-                    'Refl': libs.fetch_data.get_saves("001_3"),
-                    'Will': libs.fetch_data.get_saves("001_3")
+                    'Fort': ("001_3"),
+                    'Refl': ("001_3"),
+                    'Will': ("001_3")
                     }
     class_skills = [
                     'Climb', 'Craft', 'Handle Animal', 'Jump', 'Listen'
@@ -39,7 +39,8 @@ class Character(object):
 
     def count_saves(self):
         for key in self.saves:
-            self.saves[key] = self.saves_lvls[key][self.lvl - 1]
+            self.saves[key] = fetch_data.get_saves(self.saves_lvls[key],
+                                                                self.lvl)
 
     def count_skill_points(self):
         if self.lvl == 1:
@@ -59,9 +60,10 @@ class Character(object):
 
     def count_lives(self):
         return (
-                self.lives + ability_modifier(self.abilities['Con']) +
-                roll(self.hit_die['sides'], self.hit_die['rolls']) +
-                self.hit_die['bonus']
+                self.lives
+                + ability_modifier(self.abilities['Con'])
+                + roll(self.hit_die['sides'], self.hit_die['rolls'])
+                + self.hit_die['bonus']
                 )
 
     # -------------------------------------------------------------------------
@@ -77,10 +79,29 @@ class Character(object):
         self.race = race
         self.ch_class = ch_class
 
+    def class_adjustment(self):
+        """
+        Adjustment of Character class according to character class ;)
+        In real, it changes the class-dependent attributes.
+        """
+        try:
+            self.abilities_order = fetch_data.get_abilities_order(self.ch_class)
+
+            for key in self.saves_lvls:
+                self.saves_lvls[key] = fetch_data.get_class_saves(key, self.ch_class)
+
+            self.class_skills = fetch_data.get_class_skills(self.ch_class)
+            self.skill_points_modifier = fetch_data.get_skillp_modifier(self.ch_class)
+            self.hit_die = fetch_data.get_hit_die(self.ch_class)
+        except  KeyError:
+            print('Default class Commoner needs no adjustment (KeyError)')
+            pass
+
     def init2(self):
         """
-        TODO: a function that will load new class attributes(both python and dnd)
-        it should use fetch_data.py and it must run before calculation
+        This method caluclates attributes of the class that cannot be
+        instantiated in the beginning but require additional data
+        TODO: Not working after the 'lvl' attribute is incremented
         """
         self.skill_points = self.count_skill_points()
         self.base_attack = self.count_base_attack()

@@ -13,10 +13,10 @@ ability_best = {
 # Manually created list of best order of abilities for a given class
 # The order can be adjusted
 # Descending order (from high priority to low)
-                'fighter'   :['Str', 'Con', 'Cha', 'Dex', 'Wis', 'Int'],
-                'rogue'     :['Dex', 'Int', 'Wis', 'Str', 'Con', 'Cha'],
-                'wizard'    :['Int', 'Wis', 'Cha', 'Con', 'Dex', 'Str'],
-                'barbarian' : None, #Done
+                'fighter'   : ['Str', 'Con', 'Cha', 'Dex', 'Wis', 'Int'],
+                'rogue'     : ['Dex', 'Int', 'Wis', 'Str', 'Con', 'Cha'],
+                'wizard'    : ['Int', 'Wis', 'Cha', 'Con', 'Dex', 'Str'],
+                'barbarian' :  None, # Done
                 'paladin'   :['Con', 'Str', 'Wis', 'Cha', 'Int', 'Dex'],
                 'sorcerer'  :['Cha', 'Int', 'Con', 'Dex', 'Str', 'Wis'],
                 'bard'      : None,
@@ -24,7 +24,6 @@ ability_best = {
                 'druid'     :['Wis', 'Int', 'Dex', 'Cha', 'Con', 'Str'],
                 'monk'      :['Wis', 'Dex', 'Str', 'Con', 'Int', 'Cha'],
                 'ranger'    :['Dex', 'Str', 'Wis', 'Con', 'Int', 'Cha'],
-
                 }
 
 ability_adjustment = {
@@ -109,7 +108,10 @@ AttackBonuses = {
 classes = {
             'barbarian': {
                 'AbilitiesOrder': ['Str', 'Dex', 'Con', 'Cha', 'Wis', 'Int'],
-                'SavesLvls':["233_2", "001_3", "001_3"],
+                'SavesLvls':{
+                                'Fort':"233_2",
+                                'Refl':"001_3",
+                                'Will': "001_3"},
                 'ClassSkills': ['Climb', 'Craft', 'Handle Animal', 'Intimidate',
                                     'Jump', 'Listen','Ride', 'Survival', 'Swim'],
                 'SkillPointsModifier': 2,
@@ -136,9 +138,13 @@ classes = {
                                 ['Damage reduction 5/-'],
                                 ['Mighty rage, Rage 6/day']]
             },
+
             'bard': {
                 'AbilitiesOrder': ['Cha', 'Dex', 'Int', 'Con', 'Str', 'Wis'],
-                'SavesLvls':["001_3", "233_2", "233_2"],
+                'SavesLvls':{
+                            'Fort': "001_3",
+                            'Refl': "233_2",
+                            'Will': "233_2"},
                 'ClassSkills': ['Appraise', 'Balance', 'Bluff', 'Climb',
                                 'Concentration', 'Craft', 'Decipher Script',
                                 'Diplomacy', 'Disguise', 'Escape Artist',
@@ -172,9 +178,13 @@ classes = {
                                 ['Inspire courage +4']
                                 ]
             },
+
             'cleric': {
                 'AbilitiesOrder': ['Wis', 'Con', 'Cha', 'Int', 'Str', 'Dex'],
-                'SavesLvls': ["233_2", "001_3", "233_2"],
+                'SavesLvls': {
+                                'Fort': "233_2",
+                                'Refl': "001_3",
+                                'Will': "233_2"},
                 'ClassSkills': ['Concentration', 'Craft', 'Diplomacy', 'Heal',
                                 'Knowledge(arcana)', 'Knowledge(history)',
                                 'Knowledge(religion)', 'Knowledge(planes)',

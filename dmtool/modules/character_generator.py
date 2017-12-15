@@ -82,6 +82,7 @@ def main(name, race, ch_class, mode):
     #-------------------------------------------------------------------------#
     #COMBAT NUMBERS
     #-------------------------------------------------------------------------#
+    character.class_adjustment()
     character.init2()
 
 
@@ -168,7 +169,7 @@ def ab_scores_select(character):
 
     if 'a' in MODE:
         print("Automated ability scores assignment")
-        for ability in get_best_abilities(character):
+        for ability in character.abilities_order:
             character.abilities[ability] = rolls.pop(0)
     else:
         print("Manual ability scores assignment")
@@ -177,7 +178,7 @@ def ab_scores_select(character):
                                                             rolls, ability)
 
             character.abilities[ability] += get_ability_adjustment(
-                                                        character.race, ability)
+                                                    character.race, ability)
 
 
 def ab_scores_assign(character, rolls, ability):
