@@ -36,6 +36,7 @@ class Character(object):
                     ]
     skill_points_modifier = 2
     hit_die = {'sides': 4, 'rolls': 1, 'bonus': 0}
+    BASE_ATTACK_LVLS = '011_12'
 
     def count_saves(self):
         for key in self.saves:
@@ -49,14 +50,6 @@ class Character(object):
         else:
             return (self.skill_points_modifier +
                     ability_modifier(self.abilities['Int']))
-
-    def count_base_attack(self):
-        if self.lvl == 1:
-            return [0]
-        elif 2 <= self.lvl <= 11:
-            return [int(self.lvl / 2)]
-        elif 12 <= self.lvl:
-            return [int(self.lvl / 2), int((self.lvl - 10) / 2)]
 
     def count_lives(self):
         return (
@@ -85,29 +78,26 @@ class Character(object):
         Adjustment of Character class according to character class ;)
         In real, it changes the class-dependent attributes.
         """
-        try:
-            self.abilities_order = fetch_data.get_abilities_order(self.ch_class)
+        self.abilities_order = fetch_data.get_abilities_order(self.ch_class)
 
-            for key in self.saves_lvls:
-                self.saves_lvls[key] = fetch_data.get_class_saves(key, self.ch_class)
+        for key in self.saves_lvls:
+            self.saves_lvls[key] = fetch_data.get_class_saves(key, self.ch_class)
 
-            self.class_skills = fetch_data.get_class_skills(self.ch_class)
-            self.skill_points_modifier = fetch_data.get_skillp_modifier(self.ch_class)
-            self.hit_die = fetch_data.get_hit_die(self.ch_class)
-        except  KeyError:
-            print('Default class Commoner needs no adjustment (KeyError)')
-            pass
+        self.class_skills = fetch_data.get_class_skills(self.ch_class)
+        self.skill_points_modifier = fetch_data.get_skillp_modifier(self.ch_class)
+        self.hit_die = fetch_data.get_hit_die(self.ch_class)
+        self.BASE_ATTACK_LVLS = fetch_data.get_class_base_attack(self.ch_class)
 
     def init2(self):
         """
         This method caluclates attributes of the class that cannot be
         instantiated in the beginning but require additional data
-        TODO: Not working after the 'lvl' attribute is incremented
         """
         self.skill_points = self.count_skill_points()
-        self.base_attack = self.count_base_attack()
         self.count_saves()
         self.lives = self.count_lives()
+        self.base_attack = fetch_data.get_base_attack(self.BASE_ATTACK_LVLS, self.lvl)
+
 
 
     # ------------------------------------------------------------------------#

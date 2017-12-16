@@ -42,6 +42,19 @@ def get_class_saves(key, ch_class):
     '''
     return data.characters.classes[ch_class]['SavesLvls'][key]
 
+def get_base_attack(id, lvl):
+    '''
+    Returns value of base attack from list according to level of character
+    '''
+    return data.characters.AttackBonuses[id][lvl-1]
+
+def get_class_base_attack(ch_class):
+    '''
+    Returns code that identifies which list of attack bonuses applies to given
+    character class
+    '''
+    return data.characters.classes[ch_class]['AttackBonuses']
+
 def get_abilities_order(ch_class):
     return data.characters.classes[ch_class]['AbilitiesOrder']
 
