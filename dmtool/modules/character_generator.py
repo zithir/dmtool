@@ -4,7 +4,6 @@ character.
 In the end the created characet should be imported to XML file with the name of
 the character.
 """
-import os
 
 from libs.dndutils import *
 from libs.fetch_data import *
@@ -76,7 +75,7 @@ def main(name, race, ch_class, mode):
         ab_scores_select(character)
 
         print("The character will have the following ability scores:")
-        print(character.abilities, "\n")
+        character.show_abilities()
         confirm = ensure(mode, "Warning, new values will be rolled.")
 
 
@@ -172,7 +171,7 @@ def ab_scores_select(character):
 
     if 'a' in MODE:
         print("Automated ability scores assignment")
-        for ability in character.abilities_order:
+        for ability in character.ABILITIES_ORDER:
             character.abilities[ability] = rolls.pop(0)
     else:
         print("Manual ability scores assignment")
