@@ -78,7 +78,6 @@ class Character(object):
         self.name = name
         self.race = race
         self.ch_class = ch_class
-        self.abilities_order = fetch_data.get_abilities_order(self.ch_class)
 
     def class_adjustment(self):
         """
@@ -86,6 +85,8 @@ class Character(object):
         In real, it changes the class-dependent attributes.
         """
         try:
+            self.abilities_order = fetch_data.get_abilities_order(self.ch_class)
+
             for key in self.saves_lvls:
                 self.saves_lvls[key] = fetch_data.get_class_saves(key, self.ch_class)
 
@@ -112,7 +113,21 @@ class Character(object):
     # AUXILIARY METHODS
     # ------------------------------------------------------------------------#
     def __repr__(self):
-        return "%s, a(n) %s %s" % (self.name, self.race, self.ch_class)
+        summary = "%s, a(n) %s %s, level %s\n" % (self.name, self.race,
+                                                self.ch_class, str(self.lvl))
+        for key in self.abilities:
+            summary += ("%s:  %s\n" % (key, str(self.abilities[key])))
+        summary += '\n'
+        summary += 'Lives: %s\n' % str(self.lives)
+        summary += 'Base attack: %s\n' % str(self.base_attack)
+        summary += '\n'
+        for key in self.saves:
+            summary += ("%s:  %s\n" % (key, str(self.saves[key])))
+        summary += '\n'
+        summary += 'Available skill point: %s\n' % self.skill_points
+        summary += 'Class skills: %s' % self.class_skills
+        return summary
+
 
     def show_abilities(self):
         for key in self.abilities:

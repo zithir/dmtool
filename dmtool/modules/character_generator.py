@@ -4,6 +4,7 @@ character.
 In the end the created characet should be imported to XML file with the name of
 the character.
 """
+import os
 
 from libs.dndutils import *
 from libs.fetch_data import *
@@ -89,6 +90,8 @@ def main(name, race, ch_class, mode):
     #-------------------------------------------------------------------------#
     # THE END
     # ------------------------------------------------------------------------#
+    with open('.\\Output\\Characters\\%s.txt' % character.name, 'w+') as f:
+        f.write(str(character))
     return character
 
 ###############################################################################

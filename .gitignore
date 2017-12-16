@@ -263,3 +263,6 @@ __pycache__/
 # Eclipse
 .project
 .pydevproject
+
+# Custom
+Output/
