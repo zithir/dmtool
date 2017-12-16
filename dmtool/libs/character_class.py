@@ -78,6 +78,7 @@ class Character(object):
         self.name = name
         self.race = race
         self.ch_class = ch_class
+        self.abilities_order = fetch_data.get_abilities_order(self.ch_class)
 
     def class_adjustment(self):
         """

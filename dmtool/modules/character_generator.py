@@ -4,7 +4,6 @@ character.
 In the end the created characet should be imported to XML file with the name of
 the character.
 """
-import os
 
 from libs.dndutils import *
 from libs.fetch_data import *
