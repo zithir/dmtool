@@ -12,8 +12,8 @@ character = None
 def make_character(name = "", race = "", ch_class = "", mode = "s"):
      global character
      character = character_generator.main(name, race, ch_class, mode)
-     return character
+     
 
 print("Welcome to dmtool")
 make_character("Monty", "human", "bard", "qa" )  # DEBUG
-character.show_abilities() # DEBUG
+character

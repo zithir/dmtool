@@ -23,40 +23,40 @@ class Character(object):
     saves = {'Fort': 0, 'Refl': 0, 'Will': 0}
     lives = 0
     # A rather random order, a randomizing function could be made
-    abilities_order = ['Con', 'Wis', 'Dex', 'Cha', 'Str', 'Int']
+    ABILITIES_ORDER = ['Con', 'Wis', 'Dex', 'Cha', 'Str', 'Int']
     saves = {'Fort': 0, 'Refl': 0, 'Will': 0}
-    saves_lvls = {
+    SAVES_LVLS = {
                     'Fort': ("001_3"),
                     'Refl': ("001_3"),
                     'Will': ("001_3")
                     }
-    class_skills = [
+    CLASS_SKILLS = [
                     'Climb', 'Craft', 'Handle Animal', 'Jump', 'Listen'
                     'Profession', 'Ride', 'Spot', 'Swim', 'Use Rope'
                     ]
-    skill_points_modifier = 2
-    hit_die = {'sides': 4, 'rolls': 1, 'bonus': 0}
+    SKILL_POINTS_MOD = 2
+    HIT_DIE = {'sides': 4, 'rolls': 1, 'bonus': 0}
     BASE_ATTACK_LVLS = '011_12'
 
     def count_saves(self):
         for key in self.saves:
-            self.saves[key] = fetch_data.get_saves(self.saves_lvls[key],
+            self.saves[key] = fetch_data.get_saves(self.SAVES_LVLS[key],
                                                                 self.lvl)
 
     def count_skill_points(self):
         if self.lvl == 1:
-            return (self.skill_points_modifier +
+            return (self.SKILL_POINTS_MOD +
                                 ability_modifier(self.abilities['Int'])) * 4
         else:
-            return (self.skill_points_modifier +
+            return (self.SKILL_POINTS_MOD +
                     ability_modifier(self.abilities['Int']))
 
     def count_lives(self):
         return (
                 self.lives
                 + ability_modifier(self.abilities['Con'])
-                + roll(self.hit_die['sides'], self.hit_die['rolls'])
-                + self.hit_die['bonus']
+                + roll(self.HIT_DIE['sides'], self.HIT_DIE['rolls'])
+                + self.HIT_DIE['bonus']
                 )
 
     # -------------------------------------------------------------------------
@@ -71,21 +71,21 @@ class Character(object):
         self.name = name
         self.race = race
         self.ch_class = ch_class
-        self.abilities_order = fetch_data.get_abilities_order(self.ch_class)
+        self.ABILITIES_ORDER = fetch_data.get_abilities_order(self.ch_class)
 
     def class_adjustment(self):
         """
         Adjustment of Character class according to character class ;)
         In real, it changes the class-dependent attributes.
         """
-        self.abilities_order = fetch_data.get_abilities_order(self.ch_class)
+        self.ABILITIES_ORDER = fetch_data.get_abilities_order(self.ch_class)
 
-        for key in self.saves_lvls:
-            self.saves_lvls[key] = fetch_data.get_class_saves(key, self.ch_class)
+        for key in self.SAVES_LVLS:
+            self.SAVES_LVLS[key] = fetch_data.get_class_saves(key, self.ch_class)
 
-        self.class_skills = fetch_data.get_class_skills(self.ch_class)
-        self.skill_points_modifier = fetch_data.get_skillp_modifier(self.ch_class)
-        self.hit_die = fetch_data.get_hit_die(self.ch_class)
+        self.CLASS_SKILLS = fetch_data.get_class_skills(self.ch_class)
+        self.SKILL_POINTS_MOD = fetch_data.get_skillp_modifier(self.ch_class)
+        self.HIT_DIE = fetch_data.get_hit_die(self.ch_class)
         self.BASE_ATTACK_LVLS = fetch_data.get_class_base_attack(self.ch_class)
 
     def init2(self):
@@ -106,6 +106,7 @@ class Character(object):
     def __repr__(self):
         summary = "%s, a(n) %s %s, level %s\n" % (self.name, self.race,
                                                 self.ch_class, str(self.lvl))
+        summary += '\n'
         for key in self.abilities:
             summary += ("%s:  %s\n" % (key, str(self.abilities[key])))
         summary += '\n'
@@ -116,7 +117,7 @@ class Character(object):
             summary += ("%s:  %s\n" % (key, str(self.saves[key])))
         summary += '\n'
         summary += 'Available skill point: %s\n' % self.skill_points
-        summary += 'Class skills: %s' % self.class_skills
+        summary += 'Class skills: %s' % self.CLASS_SKILLS
         return summary
 
 
