@@ -53,7 +53,8 @@ def main(name, race, ch_class, mode):
             print("Provided class is not availible.")
             ch_class = ch_class_select()
 
-        print("The character will be ", character, "\n")
+        NRC = "%s, a(n) %s %s" % (name, race, ch_class)
+        print("The character will be ", NRC, "\n")
         # Ensuring that imput is valid, otherwise the process restarts
         confirm = ensure(MODE)
         if confirm is False:
